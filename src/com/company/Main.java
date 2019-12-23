@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         int[] lastArray = new int[99999];
         int counterOfLastArray = 0;
         Scanner scanner = new Scanner(System.in);

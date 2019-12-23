@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        //int[] lastArray = new int[99999];
-        //int counterOfLastArray = 0;
+        int[] lastArray = new int[99999];
+        int counterOfLastArray = 0;
         Scanner scanner = new Scanner(System.in);
         String userInputString = scanner.next();
         int numberOfDigits = userInputString.length();
@@ -26,8 +26,11 @@ public class Main {
             int[] numbers = new int[10000];
             int counter = 0;
 
-            //Pt. 1
+            //Pt. I
+            //searching for numbers within the range and removing unwanted number
+            //by reducing it to zero
             while (t > 0) {
+                //Wanted if
                 if (t % 10 > 0 && t % 10 <= numberOfDigits) {
                     t /= 10;
                 } else {
@@ -36,44 +39,51 @@ public class Main {
                 }
             }
 
+            //Pt. II
+            //Adding them to numbers[] with custom counter.
             if (t != -1) {
                 numbers[counter] = i;
                 counter += 1;
             }
 
-            for (int iz = 0; iz < counter; iz += 1) {
-                //if (numbers[iz] > 0) {
 
-                    System.out.println(numbers[iz]);
-                    //System.out.println();
-                    //lastArray[counterOfLastArray] = numbers[iz];
-                    //counterOfLastArray += 1;
-                //}
+            //Pt. III
+            //picking elements from array.
+            for (int iv = 0; iv < counter; iv += 1) {
+                String sCopy = String.valueOf(numbers[iv]);
+
+
+                //Pt. IV
+                //checking numbers and deleting redundant like 111 x and 123 ok.
+                for (int j = 0; j < sCopy.length(); j += 1) {
+                    for (int k = j + 1; k < sCopy.length(); k += 1) {
+                        if (sCopy.charAt(j) == sCopy.charAt(k)) {
+                            numbers[iv] = 0;
+                            break;
+                        }
+                    }
+                }
+
+                //Pt. V
+                //adding the unique elements from numbers[] to lastArray[]
+                if (numbers[iv] > 0) {
+                    //System.out.println(numbers[iv] + "  is unique");
+                    lastArray[counterOfLastArray] = numbers[iv];
+                    counterOfLastArray += 1;
+                }
             }
-
-            //System.out.println(1);
-//            for (int q = 0; q <= 12; q += 1) {
-//                System.out.println(lastArray[q]);
-//            }
-
-
-//            for (int j = 0; j < numberOfDigits; j+=1) {
-//                for (int k = j + 1; k < numberOfDigits; k += 1) {
-//                    if (numbers[j] == numbers[k]) {
-//                        //System.out.println(i);
-//                    }
-//                    t = i;
-//                    //System.out.println(t+" T is unique");
-//                }
-//            }
-//            while (t > 0) {
-//                System.out.println(userInputString.charAt(t%10-1));
-//                t /= 10;
-//            }
-            //System.out.println();
-
         }
-        // write your code here
+
+        //Pt. VI
+        //printing the elements of userInputString based on numbers.
+        for (int q = 0; q < counterOfLastArray; q += 1) {
+            int t = lastArray[q];
+            while (t > 0) {
+                System.out.print(userInputString.charAt(t%10-1));
+                t /= 10;
+            }
+            System.out.println();
+        }
     }
 
 
